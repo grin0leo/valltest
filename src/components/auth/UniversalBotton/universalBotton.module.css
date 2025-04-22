@@ -1,0 +1,21 @@
+.button {
+    background-color: rgba(193, 239, 0, 1);
+    color: black;
+    border-radius: 12px;
+    height: 54px;
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+  
+  .button:hover {
+    opacity: 0.9;
+  }

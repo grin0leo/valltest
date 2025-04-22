@@ -1,0 +1,32 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+  
+  .authButton {
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background-color: #303132;
+    border-radius: 12px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .authButton:hover {
+    background-color: #404142;
+  }
+  
+  .icon {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  
+  .vkIcon {
+    width: 2.75rem;
+    height: 2.75rem;
+  }

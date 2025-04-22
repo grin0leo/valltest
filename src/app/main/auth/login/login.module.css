@@ -1,0 +1,135 @@
+.container {
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  min-height: 100vh;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loginBox {
+  position: absolute;
+  background: rgba(28, 28, 28, 0.81);
+  padding: 32px;
+  margin-top: 10vh;
+  border-radius: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 360px;
+  height: 538px;
+  display: flex;
+  flex-direction: column;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+@media (min-width: 1024px) {
+  .loginBox {
+    margin-top: 0;
+    width: 464px;
+    right: 5vw;
+    left: auto;
+    transform: none;
+  }
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+
+.title {
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-top: 24px;
+  margin-bottom: 1.25rem;
+}
+
+.input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  outline: none;
+  color: white;
+  border: none;
+}
+
+.input:focus {
+  outline: 2px solid #8b5cf6;
+}
+
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.forgotLink {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.forgotPassword {
+  color: #95A4FC;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.forgotPassword:hover {
+  color: #c7cffb;
+}
+
+.divider {
+  width: 100%;
+  height: auto;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.dividerImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.authButtons {
+  margin-top: 8px;
+}
+
+.submitButton {
+  margin-top: 5vh;
+}
+
+.signUp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 4vh;
+  color: #ABABAD;
+}
+
+.signUpLink {
+  color: #95A4FC;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.signUpLink:hover {
+  color: #c7cffb;
+}
