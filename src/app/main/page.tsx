@@ -1,4 +1,10 @@
-export function Main() {
+export default function Main() {
 
+
+    return (
+        <div>
+            asdasd
+        </div>
+    )
 
 }
