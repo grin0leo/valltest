@@ -8,6 +8,11 @@
 html,
 body {
   max-width: 100%;
+  color: white;
+  background-color: var(--bg);
+
+  font-family: Arial, sans-serif;
+
 }
 
 body {}
@@ -21,4 +26,14 @@ body {}
 button {
   background-color: transparent;
   border: none;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+ul {
+  list-style-type: none;
 }

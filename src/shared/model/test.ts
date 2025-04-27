@@ -3,7 +3,7 @@
 export type Test = {
     id?: number;
     testName: string;
-    difficulty: string;
+    difficulty: 'Легкий' | 'Средний' | 'Сложный';
     tags: Tag[];
     problems: Problem[]
     topic?: string;

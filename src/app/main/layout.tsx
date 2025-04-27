@@ -9,7 +9,9 @@ export default function RootLayout({
 
         <>
             <LeftAside />
-            {children}
+            <section style={{ paddingLeft: '100px' }}>
+                {children}
+            </section>
         </>
 
     );

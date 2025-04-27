@@ -1,0 +1,4 @@
+.testsList {
+    display: flex;
+    gap: 16px;
+}
