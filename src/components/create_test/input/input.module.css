@@ -1,0 +1,35 @@
+.testNameContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .testNameLabel {
+    color: white;
+    font-family: Arial, sans-serif;
+    display: block;
+    margin-bottom: 8px;
+    font-size: 20px;
+  }
+  
+  .testNameInput {
+    background-color: #1C1C1D;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    width: 293px;
+    height: 48px;
+    font-family: Arial, sans-serif;
+    outline: none;
+    font-size: 16px;
+  }
+  
+  .testNameInput::placeholder {
+    color: #49494A;
+    opacity: 1;
+  }
+  
+  .required {
+    color: #718096;
+  }
