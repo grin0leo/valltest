@@ -1,0 +1,122 @@
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 80px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 998;
+  background-color: #1c1c1de8;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+  .header {
+    background-color: #1c2523e1;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+}
+
+.logo {
+  z-index: 200;
+}
+
+.navLinks {
+  display: flex;
+  gap: 41px;
+}
+
+.navLink {
+  color: white;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  opacity: 0.8;
+}
+
+.authContainer {
+  display: flex;
+  gap: 20px;
+}
+
+.signupLink {
+  color: white;
+  font-family: sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.loginButton {
+  background-color: rgba(193, 239, 0, 1);
+  color: black;
+  height: 40px;
+  width: 97px;
+  border-radius: 12px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+}
+
+.loginButton:hover {
+  opacity: 0.9;
+  background-color: #b4dd00;
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.mobileMenuButton {
+  position: relative;
+  display: none;
+  background: #C1EF00;
+  color: black;
+  height: 40px;
+  width: 72px;
+  border-radius: 12px;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  z-index: 1002;
+}
+
+@media (max-width: 1024px) {
+  .header .navLinks {
+    gap: 30px;
+  }
+
+  .header .navLink {
+    font-size: 12px;
+    line-height: 20px;
+  }
+}
+
+@media (max-width: 900px) {
+  .header .navLinks,
+  .header .authContainer {
+    display: none;
+  }
+
+  .header .mobileMenuButton {
+    display: flex;
+  }
+}
