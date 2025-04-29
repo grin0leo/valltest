@@ -5,6 +5,7 @@ import css from './aside.module.css'
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
+import { CreateTestButton } from '../CreateTestButton'
 
 
 export function LeftAside() {
@@ -30,10 +31,7 @@ export function LeftAside() {
                 <Image src={'/Layout/Vt.svg'} width="39" height="24" alt="Лого" />
             </Link>
 
-            {/* написать скрипт для появления popUp окна */}
-            <button className={css.button} aria-label="Создать тест">
-                <Image src={"/Layout/cross.svg"} width={16} height={16} alt="Иконка Создать тест" />
-            </button>
+            <CreateTestButton onClick={() => 1} />
 
             <nav className={css.list}>
                 {links.map((el, i) => (

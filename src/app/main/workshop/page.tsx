@@ -1,7 +1,9 @@
+'use client'
+
 import { TestCard } from '@/shared/ui/TestCard'
 import css from './workshop.module.css'
-import Link from 'next/link'
 import { TestsBlock } from '@/components/workshop/TestsBlock'
+import { CreateTestButton } from '@/shared/ui/CreateTestButton'
 
 export default function Workshop() {
 
@@ -16,9 +18,7 @@ export default function Workshop() {
                 <h1 className={css.title}>Мастерская</h1>
 
                 {/* ПЕРЕИСПОЛЬЗОВАТЬ !!! и добавить кнопку открытия формы */}
-                <button>
-                    Создать тест
-                </button>
+                <CreateTestButton onClick={() => 1} text='Создать тест' />
 
             </header>
 
