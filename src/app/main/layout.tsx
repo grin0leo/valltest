@@ -1,4 +1,5 @@
 import { LeftAside } from "@/shared/ui/Aside";
+import css from './layout.module.css'
 
 export default function RootLayout({
     children,
@@ -9,7 +10,7 @@ export default function RootLayout({
 
         <>
             <LeftAside />
-            <section style={{ paddingLeft: '100px' }}>
+            <section className={css.wrapper} >
                 {children}
             </section>
         </>

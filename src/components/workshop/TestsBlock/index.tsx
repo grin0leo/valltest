@@ -22,7 +22,11 @@ export function TestsBlock({ userId }: { userId: string | number }) {
         queryFn: () => getAllTests(userId)
     })
 
-    if (isLoading) return <p>Загрузка...</p>;
+    if (isLoading) return (
+        <div className={css.loaderWrapper}>
+            <span className={css.loader}></span>
+        </div>
+    );
     if (error) return <p>Error loading tests</p>;
 
     const tests = data?.data || [];

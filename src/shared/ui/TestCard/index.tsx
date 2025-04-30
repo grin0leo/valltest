@@ -59,15 +59,15 @@ export function TestCard({
                 {/* FUNC BUTTON BLOCK  */}
                 <section className={css.buttonsList}>
                     <Link href={`/main/solve_test/${testId}`}>
-                        <button className={clsx(css.button, css.arrow)}>
+                        <button className={css.button}>
                             Пройти тест
-                            <Image src={'/Workshop/arrow.svg'} width={14} height={14} alt='Иконка' />
+                            <Image className={css.arrow} src={'/Workshop/arrow.svg'} width={14} height={14} alt='Иконка' />
                         </button>
                     </Link>
                     <Link href={`/main/edit/${testId}`}>
-                        <button className={clsx(css.button, css.arrow)}>
+                        <button className={css.button}>
                             Редактировать
-                            <Image src={'/Workshop/arrow.svg'} width={14} height={14} alt='Иконка' />
+                            <Image className={css.arrow} src={'/Workshop/arrow.svg'} width={14} height={14} alt='Иконка' />
                         </button>
                     </Link>
 

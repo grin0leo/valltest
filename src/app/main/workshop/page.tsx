@@ -17,8 +17,9 @@ export default function Workshop() {
             <header className={css.titleBlock}>
                 <h1 className={css.title}>Мастерская</h1>
 
-                {/* ПЕРЕИСПОЛЬЗОВАТЬ !!! и добавить кнопку открытия формы */}
-                <CreateTestButton onClick={() => 1} text='Создать тест' />
+                <div className={css.createTest}>
+                    <CreateTestButton onClick={() => 1} text='Создать тест' />
+                </div>
 
             </header>
 
@@ -26,7 +27,6 @@ export default function Workshop() {
 
             {/* УДАЛИТЬ ЭТО ПРИМЕР */}
             <section>
-                {/* ВИЗУАЛЬНЫЙ ПРИМЕР */}
                 <TestCard testName='Русский 10 класс ТЕСТ' questions={10} testId={1} />
             </section>
 
