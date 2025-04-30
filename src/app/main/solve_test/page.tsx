@@ -1,4 +1,4 @@
-export function SolveTest() {
+export default function SolveTest() {
 
 
 }

@@ -1,0 +1,79 @@
+.main {
+    background-color: rgba(28, 28, 29, 0.96);
+    height: 100vh;
+    width: 100vw;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.section {
+    background-color: rgba(20, 20, 21, 1);
+    border-radius: 24px;
+    padding: 24px;
+    min-width: 514px;
+}
+
+.h1 {
+    color: white;
+    font-family: Arial;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    vertical-align: middle;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.p {
+    color: rgba(137, 137, 138, 1);
+    font-family: Arial;
+    font-weight: 400;
+    font-size: 40px;
+    letter-spacing: 0%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.span {
+    color: rgba(193, 239, 0, 1);
+}
+
+.nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.a1 {
+    background-color: rgba(28, 28, 29, 1);
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-family: Arial;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.a2 {
+    background-color: rgba(193, 239, 0, 1);
+    text-decoration: none;
+    color: black;
+    width: 100%;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-family: Arial;
+    font-weight: 300;
+    font-size: 18px;
+}
