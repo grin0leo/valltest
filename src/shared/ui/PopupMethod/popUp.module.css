@@ -1,0 +1,132 @@
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(28, 28, 29, 0.96);
+}
+
+.button {
+    padding: 8px 16px;
+    background-color: rgba(193, 239, 0, 1);
+    color: black;
+    border: none;
+    cursor: pointer;
+    height: 30px;
+    width: 140px;
+    border-radius: 8px;
+}
+
+.dialog {
+    padding: 0;
+    border: none;
+    min-width: 100%;
+    min-height: 100%;
+    background-color: rgb(0, 0, 0, 0.5);
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    &::backdrop{
+        display: none ;
+    }
+}
+
+.dialog:not([open]) {
+    display: none;
+}  
+
+.nav{
+    background-color:rgba(20, 20, 21, 1);
+    width: 500px;
+    height: auto;
+    padding: 24px;
+    border-radius: 24px;
+}
+
+.top {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 48px;
+    margin-bottom: 24px;
+}
+
+.title {
+    margin-top: 0;
+    color: white;
+    width: 350px;
+    font-size: 32px;
+    font-family: Arial;         /* Шрифт Arial — системный, читаемый */
+    font-weight: 700;           /* Обычный (нормальный) вес шрифта */
+    line-height: 100%;          /* Межстрочный интервал = 100% от размера шрифта (т.е. 20px) */
+    letter-spacing: 0%;         /* Расстояние между буквами (стандартное) */
+}
+
+.buttonsgap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.choosebuttons {
+    background-color: rgba(28, 28, 29, 1);
+    display: flex;
+    flex-direction: column;
+    border: none;
+    padding: 16px;
+    cursor: pointer;
+    border-radius: 12px;
+    gap: 8px;
+}
+
+.buttonstitle {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 100;
+    font-size: 16px;            /* Размер шрифта */
+    line-height: 100%;          /* Межстрочный интервал = 100% от размера шрифта (т.е. 20px) */
+    text-align: left;
+}
+
+.p {
+    color: rgba(73, 73, 74, 1);
+    text-align: left;
+    font-family: Arial, sans-serif;           /* явно указываем запасной sans-serif */
+    font-weight: 400;                         /* или 300, если система эмулирует этот вес */
+    font-size: 16px;                          /* ок */
+}
+
+.close {
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+.h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 300; /* Или 300, если надо тонко */
+    font-size: 20px;
+    line-height: 1.2;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
