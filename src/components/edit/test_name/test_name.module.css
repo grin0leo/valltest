@@ -1,0 +1,116 @@
+.testNameContainer {
+    background-color: #141415;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    position: relative;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+  
+  .titleSection {
+    flex-grow: 1;
+    margin-right: 1rem;
+  }
+  
+  .titleWrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .title {
+    font-size: 1.875rem;
+    color: white;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+  
+  .testInfo {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+  
+  .infoItem {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .infoIcon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .infoText {
+    font-size: 13px;
+    color: #718096;
+  }
+  
+  .tagsContainer {
+    display: flex;
+    gap: 0.75rem;
+  }
+  
+  .tag {
+    background-color: #1C1C1D;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 10px;
+    font-size: 13px;
+    width: 111px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .titleInput {
+    font-size: 1.875rem;
+    color: white;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #333;
+    width: 100%;
+    padding: 0.5rem 0;
+    outline: none;
+  }
+  
+  .editBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .editIcon {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+  
+  .saveBtn {
+    background-color: #1C1C1D;
+    color: white;
+    font-size: 1.125rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    border: 2px solid #C1EF00;
+    transition: all 0.2s ease;
+    text-decoration: none;
+  }

@@ -1,0 +1,54 @@
+.buttonWrapper {
+    position: relative;
+  }
+  
+  .actionButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 210px;
+    height: 54px;
+    background-color: transparent;
+    border: 1px solid #C1EF00;
+    color: white;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 12px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .actionButton:hover {
+    background-color: #C1EF00;
+    color: #1C1C1D;
+  }
+  
+  .tooltip {
+    position: absolute;
+    width: 200px;
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.4);
+    border-radius: 12px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+    z-index: 20;
+    pointer-events: none;
+  }
+  
+  @media (min-width: 768px) {
+    .tooltip {
+      bottom: -70px;
+      left: 0;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .tooltip {
+      top: 0;
+      left: calc(45% + 10px);
+      bottom: auto;
+    }
+  }

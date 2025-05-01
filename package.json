@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.74.4",
     "autoprefixer": "^10.4.21",
     "axios": "^1.8.4",
     "clsx": "^2.1.1",
@@ -23,6 +24,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "postcss-nested": "^7.0.2",
+    "@types/react-query": "^1.2.8",
     "typescript": "^5"
   }
 }

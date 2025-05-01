@@ -1,0 +1,112 @@
+
+.container {
+    min-height: 100vh;
+    padding: 20px;
+    background-color: #1C1C1D;
+    font-family: Arial, sans-serif;
+    color: white;
+  }
+
+.saveButtonContainer {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+}
+
+.saveButton {
+  background-color: #1C1C1D;
+  color: white;
+  font-size: 1.125rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: 2px solid #C1EF00;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  font-family: Arial, sans-serif; 
+}
+
+.saveButton:hover {
+  background-color: #C1EF00;
+  color: black;
+  transform: scale(1.05);
+}
+
+.content {
+  margin-top: 1rem;
+}
+
+.titleInput {
+  font-size: 1.875rem;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  background: transparent;
+  border: none;
+  width: 100%;
+  padding: 0.5rem 0;
+  border-bottom: 2px solid #333;
+  font-family: Arial, sans-serif; 
+}
+
+.titleInput:focus {
+  outline: none;
+  border-bottom-color: #C1EF00;
+}
+
+.titleInput::placeholder {
+  color: #555;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  font-family: Arial, sans-serif; 
+}
+
+@media (min-width: 768px) {
+  .formGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.formGroup {
+  grid-column: span 1;
+}
+
+@media (min-width: 768px) {
+  .formGroup:first-child {
+    grid-column: span 1;
+  }
+}
+
+.label {
+  display: block;
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  font-family: Arial, sans-serif;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background-color: #1E1E1F;
+  color: white;
+  border: 1px solid #1E1E1F;
+  outline: none;
+  font-family: Arial, sans-serif; 
+}
+
+.input:focus,
+.select:focus {
+  border-color: #C1EF00;
+}
+ 

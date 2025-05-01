@@ -1,0 +1,14 @@
+.validationContainer {
+    width: 100%;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    border-radius: 0.75rem;
+    color: rgb(239, 68, 68);
+    border: 2px solid rgb(239, 68, 68);
+    background-color: #141415;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
