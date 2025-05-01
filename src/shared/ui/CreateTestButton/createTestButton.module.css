@@ -1,0 +1,14 @@
+.button {
+    background-color: var(--green);
+
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+
+    gap: 10px;
+    color: var(--color);
+    font-weight: 700;
+
+}

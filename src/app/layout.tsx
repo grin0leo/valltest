@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ReactQueryProvider } from '@/app/providers/QueryProvider';
 
 
 export const metadata: Metadata = {
@@ -21,8 +22,9 @@ export default function RootLayout({
           />
       </head>
       <body>
-        
-        {children}
+        <ReactQueryProvider>
+          {children}
+        </ReactQueryProvider>
       </body>
     </html>
   );
