@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { BurgerMenu } from "@/components/landing/BurgerMenu";
-import styles from "./HeaderLanding.module.css";
+import styles from "./headerLanding.module.css";
 
 export function HeaderLanding() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

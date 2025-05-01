@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import styles from "./BurgerMenu.module.css";
+import styles from "./burgerMenu.module.css";
 import clsx from "clsx";
 
 interface BurgerMenuProps {
