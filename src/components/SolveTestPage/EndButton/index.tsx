@@ -32,7 +32,7 @@ export function EndButton({ testName, userAnswers, isDisabled }: Props) {
                 </div>
             )}
             <button
-                className={clsx(css.button_end, { [css.active]: !isDisabled })}
+                className={clsx(css.button_end, !isDisabled && css.button_end_active)}
                 disabled={isDisabled}
                 onClick={handleSubmit}
             >

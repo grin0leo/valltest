@@ -1,4 +1,47 @@
+.notice {
+    width: 423px;
+    height: 44px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    font-family: Arial;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    letter-spacing: 0%;
+    color: rgba(255, 255, 255, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
 .button_end {
     height: 54px;
-    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: none;
+    outline: 2px solid rgba(193, 239, 0, 1);
+    outline-offset: -2px;
+    background-color: transparent;
+    color: white;
+    border-radius: 12px;
+    font-family: Arial;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 100%;
+    letter-spacing: 0%;
+    margin-bottom: 24px;
+    cursor: not-allowed;
+}
+
+.button_end_active {
+    background-color: rgba(193, 239, 0, 1);
+    color: black;
+    cursor: pointer;
+}
+
+.button_end_active:active {
+    background-color: rgba(191, 239, 0, 0.8);
 }

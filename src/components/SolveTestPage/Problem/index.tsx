@@ -40,18 +40,23 @@ export function Problem({
                     // Расчёт цвета кнопки
                     const colorClass = css[`color${(idx % 4) + 1}`];
                     return (
-                        <button
-                            key={answer.id}
-                            onClick={() => handleAnswerClick(answer.id)}
-                            className={clsx(
-                                css.problem_answer, // Основной стиль кнопки
-                                colorClass,           // Цветовая модификация
-                                selectedAnswer === answer.id && css.selected // Если ответ выбран, добавляем класс selected
-                            )}
-                            aria-label={`Вариант ${answer.id}`}
-                        >
-                            {answer.value}
-                        </button>
+                        <div className={css.position}>
+                            <button
+                                key={answer.id}
+                                onClick={() => handleAnswerClick(answer.id)}
+                                className={clsx(
+                                    css.problem_answer, // Основной стиль кнопки
+                                    colorClass,           // Цветовая модификация
+                                    selectedAnswer === answer.id && css.selected // Если ответ выбран, добавляем класс selected
+                                )}
+                                aria-label={`Вариант ${answer.id}`}
+                            >
+                                {answer.value}
+                            </button>
+                            <div className={css.problem_answer_id}>
+                                {answer.id}
+                            </div>
+                        </div>
                     );
                 })}
             </div>
