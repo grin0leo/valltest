@@ -29,8 +29,7 @@ type UseTests = {
     createTest: (creationInfo: Test) => Promise<AxiosResponse>;
     getAllTests: (userId: string | number) => Promise<AxiosResponse>;
     getTestById: (testId: string | number) => Promise<AxiosResponse>;
-    // loading: boolean;
-    // error: string | null;
+    getTestByIdLc: (testId: string | number) => Promise<void>;
 };
 
 export const useRequests = (): UseTests => {
@@ -48,11 +47,25 @@ export const useRequests = (): UseTests => {
     const getTestById = async (testId: string | number) => {
         return await api.get(`/get_test/${testId}`)
         // const response = await api.get(`/tests/${testId}`);
-
     }
 
+    // EDIT получаем тест по ID и добавляем его в localStorage
+    const getTestByIdLc = async (testId: string | number) => {
+        try {
+            const response = await getTestById(testId);
+            if (response.status === 200) {
+                localStorage.setItem("test", JSON.stringify(response.data));
+            } else {
+                console.error("Не удалось получить тест", response.status);
+            }
+        } catch (error) {
+            console.error("Ошибка при получении теста:", error);
+        }
+    };
 
-    return { createTest, getAllTests, getTestById };
+
+
+    return { createTest, getAllTests, getTestById, getTestByIdLc };
 
 
 }
