@@ -5,14 +5,19 @@ import css from './simplebutton.module.css';
 interface ButtonProps {
   href: string;
   children: React.ReactNode;
+  onClick?: () => void;
+  disabled?: boolean
 }
 
-export default function SimpleButton({ href, children }: ButtonProps) {
+export default function SimpleButton({ href, children, onClick, disabled }: ButtonProps) {
   return (
-    <div className={css.buttonWrapper}>
-      <a href={href} className={css.actionButton}>
+    <button className={css.buttonWrapper} disabled={disabled} onClick={onClick}>
+      <p className={css.actionButton}>
         {children}
-      </a>
-    </div>
+      </p>
+      {/* <a href={href} className={css.actionButton}>
+        {children}
+      </a> */}
+    </button>
   );
 }
