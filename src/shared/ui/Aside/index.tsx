@@ -6,6 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from 'next/navigation'
 import { CreateTestButton } from '../CreateTestButton'
+import { TestPopupWrapper } from '../TestPopupWrapper'
 
 
 export function LeftAside() {
@@ -31,7 +32,8 @@ export function LeftAside() {
                 <Image src={'/Layout/Vt.svg'} width="39" height="24" alt="Лого" />
             </Link>
 
-            <CreateTestButton onClick={() => 1} />
+
+            <TestPopupWrapper />
 
             <nav className={css.list}>
                 {links.map((el, i) => (
