@@ -15,7 +15,7 @@ export function ResultPage() {
 
     const getResult = async (id: string) => {
         try {
-            const response = await axios.get(`http://103.88.242.151:7777/api/user-answers/${id}`, {
+            const response = await axios.get(`/api/user-answers/${id}`, {
                 withCredentials: false, // Важно! Отправляем куки
             });
             console.log(response.data);

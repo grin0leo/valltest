@@ -166,7 +166,7 @@ const CreateTestPage = () => {
 
       <ActionButtonsGroup
         shareHref="/share-link"
-        takeTestHref="/test-link"
+        takeTestHref="/main/solve_test"
         onSave={handleSaveToWorkshop}
         isSaved={isSaved}
       />
