@@ -44,7 +44,8 @@ export default function GeneralInfoPage() {
     const testData = {
       testName: inputValues.testName.trim(),
       topic: inputValues.topic.trim(),
-      level: selectedLevel.trim()
+      difficulty: selectedLevel.trim(),
+      problems: []
     };
 
     localStorage.setItem('testDraft', JSON.stringify(testData));

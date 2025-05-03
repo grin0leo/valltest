@@ -1,17 +1,18 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { TaskForm } from '@/components/edit/task_form/task_form';
 import { AddTaskButton } from '@/components/edit/add_task_button/add_task_button';
 import { TestName } from '@/components/edit/test_name/test_name';
 import { ActionButtonsGroup } from '@/components/edit/actionButtonsGroup/actionButtonsGroup';
 import styles from './edit.module.css';
-
+import { LocalStorageDraftTest } from '@/shared/api/req';
 interface Task {
   question: string;
   answers: { value: string; is_correct: boolean }[];
 }
+
 
 const CreateTestPage = () => {
   const router = useRouter();
@@ -23,12 +24,39 @@ const CreateTestPage = () => {
   const [error, setError] = useState('');
   const [isSaved, setIsSaved] = useState(false);
 
-  const isTestProblemsValid = tasks.every(task => 
+  //ПОДТЯГИВАЮ информацию о тесте из LocalStorage
+  useEffect(() => {
+    const raw = localStorage.getItem('draftTest');
+    if (!raw) return;
+
+    try {
+      const parsed: LocalStorageDraftTest = JSON.parse(raw);
+
+      setTestName(parsed.testName ?? '');
+      setTopic(parsed.topic ?? '');
+      setDifficulty(parsed.difficulty ?? 'medium');
+
+      setTasks(
+        parsed.questions.map((q) => ({
+          question: q.question,
+          answers: q.answers.map((a) => ({
+            value: a.answer,
+            is_correct: a.isCorrect,
+          })),
+        }))
+      );
+    } catch (err) {
+      console.error('Ошибка при загрузке черновика:', err);
+    }
+  }, []);
+
+  const isTestProblemsValid = tasks.every(task =>
     task.question.trim() !== '' &&
-    task.answers.length >= 2 && 
+    task.answers.length >= 2 &&
     task.answers.some(answer => answer.is_correct) &&
     task.answers.every(answer => answer.value.trim() !== '')
   );
+
 
   const handleShareTest = () => {
     console.log('Тест поделен');
@@ -60,8 +88,8 @@ const CreateTestPage = () => {
     try {
       const response = await new Promise<{ success: boolean; testId?: string }>((resolve) => {
         setTimeout(() => {
-          resolve({ 
-            success: true, 
+          resolve({
+            success: true,
             testId: `test-${Math.random().toString(36).substring(2, 9)}`
           });
         }, 1000);
@@ -78,12 +106,12 @@ const CreateTestPage = () => {
   };
 
   const handleAddTask = () => {
-    setTasks([...tasks, { 
-      question: '', 
+    setTasks([...tasks, {
+      question: '',
       answers: [
         { value: '', is_correct: false },
         { value: '', is_correct: false }
-      ] 
+      ]
     }]);
   };
 
@@ -105,7 +133,7 @@ const CreateTestPage = () => {
 
   return (
     <div className={styles.container}>
-      <TestName 
+      <TestName
         name={testName}
         onNameChange={setTestName}
         difficulty={difficulty}
@@ -136,12 +164,12 @@ const CreateTestPage = () => {
         </div>
       )}
 
-<ActionButtonsGroup
-  shareHref="/share-link" 
-  takeTestHref="/test-link" 
-  onSave={handleSaveToWorkshop}
-  isSaved={isSaved}
-/>
+      <ActionButtonsGroup
+        shareHref="/share-link"
+        takeTestHref="/test-link"
+        onSave={handleSaveToWorkshop}
+        isSaved={isSaved}
+      />
 
     </div>
   );

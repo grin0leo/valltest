@@ -4,6 +4,7 @@ import { TestCard } from '@/shared/ui/TestCard'
 import css from './workshop.module.css'
 import { TestsBlock } from '@/components/workshop/TestsBlock'
 import { CreateTestButton } from '@/shared/ui/CreateTestButton'
+import { TestPopupWrapper } from '@/shared/ui/TestPopupWrapper'
 
 export default function Workshop() {
 
@@ -18,7 +19,7 @@ export default function Workshop() {
                 <h1 className={css.title}>Мастерская</h1>
 
                 <div className={css.createTest}>
-                    <CreateTestButton onClick={() => 1} text='Создать тест' />
+                    <TestPopupWrapper text='Создать тест' />
                 </div>
 
             </header>

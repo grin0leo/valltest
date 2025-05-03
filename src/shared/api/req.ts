@@ -25,12 +25,28 @@ export type Answer = {
 type Tag = {
     name: string;
 };
+
 type UseTests = {
     createTest: (creationInfo: Test) => Promise<AxiosResponse>;
     getAllTests: (userId: string | number) => Promise<AxiosResponse>;
     getTestById: (testId: string | number) => Promise<AxiosResponse>;
     getTestByIdLc: (testId: string | number) => Promise<void>;
+    submitDraftTest: () => Promise<string>
 };
+
+export type LocalStorageDraftTest = {
+    testName: string;
+    topic: string;
+    difficulty: string;
+    questions: {
+        question: string;
+        answers: {
+            answer: string;
+            isCorrect: boolean;
+        }[];
+    }[];
+};
+
 
 export const useRequests = (): UseTests => {
     // CREATE_TEST
@@ -49,7 +65,8 @@ export const useRequests = (): UseTests => {
         // const response = await api.get(`/tests/${testId}`);
     }
 
-    // EDIT получаем тест по ID и добавляем его в localStorage
+
+    // получаем тест по ID и добавляем его в localStorage
     const getTestByIdLc = async (testId: string | number) => {
         try {
             const response = await getTestById(testId);
@@ -64,8 +81,17 @@ export const useRequests = (): UseTests => {
     };
 
 
+    // Отправляю json а бэк, это запрос к странице edit 
+    const submitDraftTest = async (): Promise<string> => {
+        const raw = localStorage.getItem('draftTest');
+        if (!raw) throw new Error('Нет черновика в localStorage');
 
-    return { createTest, getAllTests, getTestById, getTestByIdLc };
+        const draft: LocalStorageDraftTest = JSON.parse(raw);
+        const res = await api.post('/tests', draft);
 
+        return res.data.testId;
+    };
+
+    return { createTest, getAllTests, getTestById, getTestByIdLc, submitDraftTest };
 
 }
