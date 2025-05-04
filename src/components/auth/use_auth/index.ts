@@ -2,9 +2,11 @@
 
 import { loginWithEmail, registerWithEmail } from '@/lib/auth-client';
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation'
 
 
 export function useAuth() {
+  const router = useRouter();
 
   const {
     mutate: login, 
@@ -12,7 +14,7 @@ export function useAuth() {
     isSuccess: wasLoginSuccesful } 
     = useMutation({
     mutationFn: ({email, password}: {email: string, password: string}) => {
-      return loginWithEmail({email, password})
+      return loginWithEmail({email, password}).then(e => router.push('/main'))
 
     }
   })
@@ -23,7 +25,7 @@ export function useAuth() {
     isSuccess: wasRegisterSuccessful,
   } = useMutation({
     mutationFn: ({ name,email, password }: { name:string, email: string; password: string }) => {
-      return registerWithEmail({name, email, password})
+      return registerWithEmail({name, email, password}).then(e => router.push('/main'))
     }
   });
 

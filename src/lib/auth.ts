@@ -8,9 +8,13 @@ const users: { email: string; passwordHash: string }[] = [];
 
 export const auth = betterAuth({
   emailAndPassword: {  
-    enabled: true
+    enabled: true,
   },
-
+  user:{
+    fields: {
+      name: 'username'
+    }
+  },
   database: new Database( ("/home/logic_off/Desktop/Valltest-backend-mvp1/test.db")
   ),
 
@@ -19,4 +23,4 @@ export const auth = betterAuth({
     password: z.string().min(6),
   }),
 });
-
+  

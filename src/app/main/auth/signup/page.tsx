@@ -5,6 +5,7 @@ import AuthButtons from '@/components/auth/LoginLinks';
 import Image from 'next/image';
 import { useAuth } from '@/components/auth/use_auth';
 import styles from './signup.module.css';
+import buttonStyles from '@/components/auth/UniversalBotton/universalBotton.module.css'; './';
 
 export default function SignUpPage() {
   const {handelRegisterFormSubmit ,isRegisterPending} = useAuth();
@@ -27,7 +28,7 @@ export default function SignUpPage() {
             <AuthButtons />
           </div>
           <div className={styles.submitButton}>
-            <button type="submit" className={styles.button}>Зарегистрироваться</button>
+            <button type="submit" className={buttonStyles.button}>Зарегистрироваться</button>
           </div>
           <div className={styles.login}>
             <p>Уже есть аккаунт? <a href="/main/auth/login" className={styles.loginLink}>Войти</a></p>
