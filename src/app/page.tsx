@@ -1,4 +1,4 @@
-import styles from "./page.module.css";
+import css from "./page.module.css";
 import { HeaderLanding } from "@/components/landing/HeaderLanding";
 import { StartLanding } from "@/components/landing/StartLanding";
 import { OpportunitiesLanding } from "@/components/landing/OpportunitiesLanding";
@@ -9,10 +9,10 @@ import { FooterLanding } from '@/components/landing/FooterLanding';
 
 export default function LandingContainers() {
   return (
-    <div className={styles.container}>
+    <div className={css.container}>
       <HeaderLanding />
       
-      <div className={styles.content}>
+      <div className={css.content}>
         <StartLanding />
         <OpportunitiesLanding />
         <AboutUsLanding />
@@ -21,7 +21,7 @@ export default function LandingContainers() {
         <FooterLanding />
       </div>
 
-      <div className={styles.backgroundImage}></div>
+      <div className={css.backgroundImage}></div>
     </div>
   );
 }

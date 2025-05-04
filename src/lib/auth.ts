@@ -11,7 +11,7 @@ export const auth = betterAuth({
     enabled: true
   },
 
-  database: new Database( ("~/Desktop/Valltest-backend-mvp1/test.db")
+  database: new Database( ("/home/logic_off/Desktop/Valltest-backend-mvp1/test.db")
   ),
 
   schema: z.object({
