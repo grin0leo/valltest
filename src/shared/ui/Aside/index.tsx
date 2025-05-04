@@ -7,6 +7,7 @@ import Link from "next/link"
 import { usePathname } from 'next/navigation'
 import { CreateTestButton } from '../CreateTestButton'
 import { TestPopupWrapper } from '../TestPopupWrapper'
+import { MobileHeader } from '../MobileHeader'
 
 
 export function LeftAside() {
@@ -25,6 +26,8 @@ export function LeftAside() {
     ]
     // TODO добавить Hover эффект 
     return (
+        <>
+        <MobileHeader />
 
         <aside className={css.aside}>
 
@@ -50,5 +53,6 @@ export function LeftAside() {
             </nav>
 
         </aside >
+        </>
     )
 }

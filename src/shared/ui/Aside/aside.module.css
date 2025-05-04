@@ -10,6 +10,7 @@
     padding: 30px 0px;
 
     gap: 50px;
+    z-index: 900px;
 
     @media (max-width: 768px) {
         width: 70px;
