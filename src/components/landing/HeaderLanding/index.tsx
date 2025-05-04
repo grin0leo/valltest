@@ -34,10 +34,10 @@ export function HeaderLanding() {
       </nav>
       
       <div className={styles.authContainer}>
-        <Link href="main/auth/signup" className={styles.signupLink}>
+        <Link href="/auth/signup" className={styles.signupLink}>
           Регистрация
         </Link>
-        <Link href="main/auth/login" className={styles.loginButton}>
+        <Link href="/auth/login" className={styles.loginButton}>
           Войти
         </Link>
       </div>

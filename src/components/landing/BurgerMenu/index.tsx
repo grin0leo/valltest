@@ -43,10 +43,10 @@ export function BurgerMenu({ isOpen, onClose, menuItems }: BurgerMenuProps) {
         </nav>
         
         <div className={styles.authContainer}>
-          <Link href="main/auth/signup" className={styles.signupLink} onClick={onClose}>
+          <Link href="/auth/signup" className={styles.signupLink} onClick={onClose}>
             Регистрация
           </Link>
-          <Link href="main/auth/login" className={styles.loginButton} onClick={onClose}>
+          <Link href="/auth/login" className={styles.loginButton} onClick={onClose}>
             Войти
           </Link>
         </div>
