@@ -1,7 +1,7 @@
 'use client';
 
 import Background from '@/components/auth/Background';
-import AuthButtons from '@/components/auth/LoginLinks';
+//import AuthButtons from '@/components/auth/LoginLinks';
 import { useAuth } from '@/components/auth/use_auth';
 import Image from 'next/image';
 import styles from './login.module.css';
@@ -24,12 +24,12 @@ export default function LoginPage() {
           <div className={styles.forgotLink}>
             <a href="/main/auth/signup" className={styles.forgotPassword}>Забыли пароль?</a>
           </div>
-          <div className={styles.divider}>
+{/*        <div className={styles.divider}>
             <Image src="/auth/line.svg" alt="Line" width={464} height={2} className={styles.dividerImage} />
           </div>
-          <div className={styles.authButtons}>
+      <div className={styles.authButtons}>
             <AuthButtons />
-          </div>
+          </div> */}
           <div className={styles.submitButton}>
             <button type="submit" className={buttonStyles.button}>{isLoginOperationPending ? "Входим" : "Войти"}</button>
           </div>
