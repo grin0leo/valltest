@@ -12,6 +12,13 @@ export type Test = {
     tags?: Tag[];
     rating?: number;
 };
+export type TestAI = {
+    testName: string;
+    subject: string;
+    difficulty: string;
+    topic: string;
+    questionsCount: string;
+}
 export type Problem = {
     question: string;
     answers: Answer[];
@@ -28,6 +35,7 @@ type Tag = {
 
 type UseTests = {
     createTest: (creationInfo: Test) => Promise<AxiosResponse>;
+    createTestAI: (creationInfo: TestAI) => Promise<AxiosResponse>;
     getAllTests: (userId: string | number) => Promise<AxiosResponse>;
     getTestById: (testId: string | number) => Promise<AxiosResponse>;
     getTestByIdLc: (testId: string | number) => Promise<void>;
@@ -52,6 +60,11 @@ export const useRequests = (): UseTests => {
     // CREATE_TEST
     const createTest = async (creationInfo: Test) => {
         return await api.post("/create_test_manually", creationInfo);
+    }
+
+    // CREATE_TEST_AI 
+    const createTestAI = async (creationInfoAI: TestAI) => {
+        return await api.post("/create_test_manually", creationInfoAI);
     }
     // WORKSHOP
     const getAllTests = async (userId: string | number) => {
@@ -92,6 +105,6 @@ export const useRequests = (): UseTests => {
         return res.data.testId;
     };
 
-    return { createTest, getAllTests, getTestById, getTestByIdLc, submitDraftTest };
+    return { createTest, getAllTests, getTestById, getTestByIdLc, submitDraftTest, createTestAI };
 
 }
