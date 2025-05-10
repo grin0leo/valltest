@@ -14,7 +14,7 @@ interface TestNameProps {
 }
 
 export const TestName = ({
-  name = "Название теста",
+  name,
   onNameChange,
   difficulty = "Легкий",
   questionsCount = 6,
@@ -64,16 +64,16 @@ export const TestName = ({
             />
           ) : (
             <div className={styles.titleWrapper}>
-              <h1 className={styles.title}>{name || "Название теста"}</h1>
-              <button 
-                onClick={handleEditClick} 
+              <h1 className={styles.title}>{name}</h1>
+              <button
+                onClick={handleEditClick}
                 className={styles.editBtn}
                 aria-label="Редактировать название"
               >
-                <img 
-                  src="/edit/pencil.svg" 
-                  alt="Редактировать" 
-                  className={styles.editIcon} 
+                <img
+                  src="/edit/pencil.svg"
+                  alt="Редактировать"
+                  className={styles.editIcon}
                   onError={(e) => {
                     const target = e.currentTarget as HTMLImageElement;
                     target.style.display = 'none';
@@ -83,7 +83,7 @@ export const TestName = ({
             </div>
           )}
         </div>
-        
+
         <Link href="/some-path" className={styles.saveBtn}>
           Сохранить в мастерскую
         </Link>

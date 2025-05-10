@@ -1,13 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from 'react';
 import { useRouter } from "next/navigation";
 import { TaskForm } from '@/components/edit/task_form/task_form';
 import { AddTaskButton } from '@/components/edit/add_task_button/add_task_button';
 import { TestName } from '@/components/edit/test_name/test_name';
 import { ActionButtonsGroup } from '@/components/edit/actionButtonsGroup/actionButtonsGroup';
 import styles from './edit.module.css';
-import { LocalStorageDraftTest } from '@/shared/api/req';
+import { LocalStorageDraftTest, useRequests } from '@/shared/api/req';
+
 interface Task {
   question: string;
   answers: { value: string; is_correct: boolean }[];
@@ -19,26 +20,27 @@ const CreateTestPage = () => {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [testName, setTestName] = useState('');
   const [topic, setTopic] = useState('');
-  const [difficulty, setDifficulty] = useState('medium');
+  const [difficulty, setDifficulty] = useState('');
   const [isPending, setIsPending] = useState(false);
   const [error, setError] = useState('');
   const [isSaved, setIsSaved] = useState(false);
 
-  //ПОДТЯГИВАЮ информацию о тесте из LocalStorage
+  const [testId, setTestId] = useState('')
+
+  const [isInitialized, setIsInitialized] = useState(false);
+
   useEffect(() => {
-    const raw = localStorage.getItem('draftTest');
+    const raw = localStorage.getItem('testDraft');
     if (!raw) return;
 
     try {
       const parsed: LocalStorageDraftTest = JSON.parse(raw);
-
       setTestName(parsed.testName ?? '');
       setTopic(parsed.topic ?? '');
-      setDifficulty(parsed.difficulty ?? 'medium');
-
+      setDifficulty(parsed.difficulty ?? '');
       setTasks(
-        parsed.questions.map((q) => ({
-          question: q.question,
+        parsed.problems.map((q) => ({
+          question: q.problem,
           answers: q.answers.map((a) => ({
             value: a.answer,
             is_correct: a.isCorrect,
@@ -47,59 +49,56 @@ const CreateTestPage = () => {
       );
     } catch (err) {
       console.error('Ошибка при загрузке черновика:', err);
+    } finally {
+      setIsInitialized(true);
     }
   }, []);
+  // ДОБАВИТЬ ЛОАДЕР 
+  if (!isInitialized) return null;
 
-  const isTestProblemsValid = tasks.every(task =>
-    task.question.trim() !== '' &&
-    task.answers.length >= 2 &&
-    task.answers.some(answer => answer.is_correct) &&
-    task.answers.every(answer => answer.value.trim() !== '')
-  );
+  // const isTestProblemsValid = tasks.every(task =>
+  //   task.question.trim() !== '' &&
+  //   task.answers.length >= 2 &&
+  //   task.answers.some(answer => answer.is_correct) &&
+  //   task.answers.every(answer => answer.value.trim() !== '')
+  // );
+  const { submitDraftTest } = useRequests();
 
-
+  // ИСПРАВИТЬ 
   const handleShareTest = () => {
     console.log('Тест поделен');
   };
-
-  const handleSaveToWorkshop = () => {
-    console.log('Тест сохранен в мастерскую');
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 3000);
+  const getDraftTestFromState = (): LocalStorageDraftTest => {
+    return {
+      testName,
+      topic,
+      difficulty,
+      problems: tasks.map(task => ({
+        problem: task.question,
+        answers: task.answers.map(ans => ({
+          answer: ans.value,
+          isCorrect: ans.is_correct
+        }))
+      }))
+    };
   };
 
-  const handleTakeTest = () => {
-    if (isSaved) {
-      console.log('Тест начат');
-    } else {
-      console.log('Тест не сохранен');
-    }
-  };
 
-  const handleCreateTest = async () => {
-    if (!isTestProblemsValid) {
-      setError('Проверьте правильность заполнения всех заданий');
-      return;
-    }
-
-    setIsPending(true);
-    setError('');
+  const handleSaveToWorkshop = async () => {
 
     try {
-      const response = await new Promise<{ success: boolean; testId?: string }>((resolve) => {
-        setTimeout(() => {
-          resolve({
-            success: true,
-            testId: `test-${Math.random().toString(36).substring(2, 9)}`
-          });
-        }, 1000);
-      });
+      setIsPending(true);
+      const draft = getDraftTestFromState();
+      localStorage.setItem('testDraft', JSON.stringify(draft));
 
-      if (response.success && response.testId) {
-        router.push(`/catalog/preview/ai_test/${response.testId}`);
-      }
+      const testId = await submitDraftTest();
+      console.log('Тест сохранен в мастерскую, ID:', testId);
+      setTestId(testId)
+      setIsSaved(true);
     } catch (err) {
-      setError('Произошла ошибка при создании теста');
+      console.error('Ошибка при сохранении теста:', err);
+      setError('Не удалось сохранить тест');
+      setIsSaved(false);
     } finally {
       setIsPending(false);
     }
@@ -166,10 +165,11 @@ const CreateTestPage = () => {
 
       <ActionButtonsGroup
         shareHref="/share-link"
-        takeTestHref="/main/solve_test"
-        onSave={handleSaveToWorkshop}
+        testId={testId}
         isSaved={isSaved}
+        onSave={handleSaveToWorkshop}
       />
+
 
     </div>
   );

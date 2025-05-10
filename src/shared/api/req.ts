@@ -46,8 +46,8 @@ export type LocalStorageDraftTest = {
     testName: string;
     topic: string;
     difficulty: string;
-    questions: {
-        question: string;
+    problems: {
+        problem: string;
         answers: {
             answer: string;
             isCorrect: boolean;
@@ -96,7 +96,7 @@ export const useRequests = (): UseTests => {
 
     // Отправляю json а бэк, это запрос к странице edit 
     const submitDraftTest = async (): Promise<string> => {
-        const raw = localStorage.getItem('draftTest');
+        const raw = localStorage.getItem('testDraft');
         if (!raw) throw new Error('Нет черновика в localStorage');
 
         const draft: LocalStorageDraftTest = JSON.parse(raw);
