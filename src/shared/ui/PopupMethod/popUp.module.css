@@ -32,18 +32,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    &::backdrop{
-        display: none ;
+
+    &::backdrop {
+        display: none;
     }
 }
 
 .dialog:not([open]) {
     display: none;
-}  
+}
 
-.nav{
-    background-color:rgba(20, 20, 21, 1);
+.nav {
+    background-color: rgba(20, 20, 21, 1);
     width: 500px;
     height: auto;
     padding: 24px;
@@ -64,10 +64,10 @@
     color: white;
     width: 350px;
     font-size: 32px;
-    font-family: Arial;         /* Шрифт Arial — системный, читаемый */
-    font-weight: 700;           /* Обычный (нормальный) вес шрифта */
-    line-height: 100%;          /* Межстрочный интервал = 100% от размера шрифта (т.е. 20px) */
-    letter-spacing: 0%;         /* Расстояние между буквами (стандартное) */
+    font-family: Arial;
+    font-weight: 700;
+    line-height: 100%;
+    letter-spacing: 0%;
 }
 
 .buttonsgap {
@@ -85,6 +85,13 @@
     cursor: pointer;
     border-radius: 12px;
     gap: 8px;
+    transition:
+        scale 300ms ease-in-out;
+
+    &:hover {
+        scale: 1.05;
+        border: 1px solid white;
+    }
 }
 
 .buttonstitle {
@@ -95,17 +102,19 @@
     color: white;
     font-family: 'Inter', sans-serif;
     font-weight: 100;
-    font-size: 16px;            /* Размер шрифта */
-    line-height: 100%;          /* Межстрочный интервал = 100% от размера шрифта (т.е. 20px) */
+    font-size: 16px;
+    /* Размер шрифта */
+    line-height: 100%;
+    /* Межстрочный интервал = 100% от размера шрифта (т.е. 20px) */
     text-align: left;
 }
 
 .p {
     color: rgba(73, 73, 74, 1);
     text-align: left;
-    font-family: Arial, sans-serif;           /* явно указываем запасной sans-serif */
-    font-weight: 400;                         /* или 300, если система эмулирует этот вес */
-    font-size: 16px;                          /* ок */
+    font-family: Arial, sans-serif;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 .close {
@@ -115,18 +124,33 @@
     border: none;
     padding: 4px;
     cursor: pointer;
+    transition:
+        scale 300ms ease-in-out;
+
+    &:hover {
+        scale: 1.5;
+
+    }
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .h2 {
     font-family: 'Inter', sans-serif;
-    font-weight: 300; /* Или 300, если надо тонко */
+    font-weight: 300;
+    /* Или 300, если надо тонко */
     font-size: 20px;
     line-height: 1.2;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-  }
+}

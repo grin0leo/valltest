@@ -2,41 +2,41 @@
 
 import { useState, useEffect } from "react";
 import css from './resultPage.module.css'
-import axios from 'axios';
+import { Loader } from "../Loader";
+import { ErrorMessage } from "../ErrorMessage";
 
 interface Result {
     score: number;
     total: number;
 }
-
 export function ResultPage() {
 
     const [result, setResult] = useState<Result | null>(null);
+    const [error, setError] = useState<boolean>(false)
 
-    const getResult = async (id: string) => {
-        try {
-            const response = await axios.get(`/api/user-answers/${id}`, {
-                withCredentials: false, // Важно! Отправляем куки
-            });
-            console.log(response.data);
-            return response.data;
-        } catch (error) {
-            console.error('Ошибка при получении ответов пользователя:', error);
-        }
-    };
+
 
     useEffect(() => {
-        async function fetchData() {
+        const raw = localStorage.getItem('testResult');
+        if (raw) {
             try {
-                const result = await getResult('1');
-                console.log(result);
-                setResult(result);
-            } catch (error) {
-                console.error(error);
+                const parsed: Result = JSON.parse(raw);
+                setResult(parsed);
+            } catch (e) {
+                console.error('Ошибка при разборе результата из localStorage', e);
+                setError(true)
             }
+        } else {
+            console.warn('Результат не найден в localStorage');
         }
-        fetchData();
     }, []);
+
+    if (error) {
+        return <ErrorMessage message="Ошибка при разборе результата" isActive={true} />
+    }
+    if (!result) {
+        return <Loader />;
+    }
 
 
     return (
@@ -52,3 +52,29 @@ export function ResultPage() {
         </main>
     );
 }
+
+
+// const getResult = async (id: string) => {
+//     try {
+//         const response = await axios.get(`/api/user-answers/${id}`, {
+//             withCredentials: false, // Важно! Отправляем куки
+//         });
+//         console.log(response.data);
+//         return response.data;
+//     } catch (error) {
+//         console.error('Ошибка при получении ответов пользователя:', error);
+//     }
+// };
+
+// useEffect(() => {
+//     async function fetchData() {
+//         try {
+//             const result = await getResult('1');
+//             console.log(result);
+//             setResult(result);
+//         } catch (error) {
+//             console.error(error);
+//         }
+//     }
+//     fetchData();
+// }, []);

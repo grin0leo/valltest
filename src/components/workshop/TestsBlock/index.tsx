@@ -5,6 +5,7 @@ import { Test } from "@/shared/model/test";
 import { TestCard } from "@/shared/ui/TestCard";
 import { useQuery } from "@tanstack/react-query"
 import css from './testsBlock.module.css'
+import { ErrorMessage } from "@/shared/ui/ErrorMessage";
 
 
 type TestWithoutProblems = Test;
@@ -27,7 +28,7 @@ export function TestsBlock({ userId }: { userId: string | number }) {
             <span className={css.loader}></span>
         </div>
     );
-    if (error) return <p>Error loading tests</p>;
+    if (error) return <ErrorMessage message='Ошибка загрузки' isActive={true} />;
 
     const tests = data?.data || [];
 

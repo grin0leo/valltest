@@ -26,10 +26,10 @@ export default function Workshop() {
 
             <TestsBlock userId={1} />
 
-            {/* УДАЛИТЬ ЭТО ПРИМЕР */}
-            <section>
+
+            {/* <section>
                 <TestCard testName='Русский 10 класс ТЕСТ' questions={10} testId={1} />
-            </section>
+            </section> */}
 
 
         </main>
