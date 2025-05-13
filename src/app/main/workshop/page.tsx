@@ -24,7 +24,7 @@ export default function Workshop() {
 
             </header>
 
-            <TestsBlock userId={1} />
+            <TestsBlock userId={''} />
 
 
             {/* <section>

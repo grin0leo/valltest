@@ -70,7 +70,9 @@ export const useRequests = (): UseTests => {
     // WORKSHOP
     const getAllTests = async (userId: string | number) => {
         // ИСПРАВИТЬ РУЧКУ
-        return await api.get(`/user/tests/${userId}`)
+        // return await api.get(`/user/tests/${userId}`)
+        return await api.get(`/tests`)
+
 
     }
     //SOLVE_TEST/
