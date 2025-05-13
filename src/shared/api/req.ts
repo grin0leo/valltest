@@ -38,6 +38,7 @@ type UseTests = {
     createTestAI: (creationInfo: TestAI) => Promise<AxiosResponse>;
     getAllTests: (userId: string | number) => Promise<AxiosResponse>;
     getTestById: (testId: string | number) => Promise<AxiosResponse>;
+    postUserAnswers: (testId: string | number) => Promise<AxiosResponse>;
     getTestByIdLc: (testId: string | number) => Promise<void>;
     submitDraftTest: () => Promise<string>
 };
@@ -78,6 +79,13 @@ export const useRequests = (): UseTests => {
         // const response = await api.get(`/tests/${testId}`);
     }
 
+    // ожидаю в ответе количество правильных ответов, добавляю его в localStorage
+    const postUserAnswers = async (testId: string | number) => {
+        const data = await api.post(`/api/user-answers/${testId}`)
+        const result = data.data.result
+        localStorage.setItem('result', result)
+        return result
+    }
 
     // получаем тест по ID и добавляем его в localStorage
     const getTestByIdLc = async (testId: string | number) => {
@@ -93,7 +101,6 @@ export const useRequests = (): UseTests => {
         }
     };
 
-
     // Отправляю json а бэк, это запрос к странице edit 
     const submitDraftTest = async (): Promise<string> => {
         const raw = localStorage.getItem('testDraft');
@@ -105,6 +112,6 @@ export const useRequests = (): UseTests => {
         return res.data.testId;
     };
 
-    return { createTest, getAllTests, getTestById, getTestByIdLc, submitDraftTest, createTestAI };
+    return { createTest, getAllTests, getTestById, getTestByIdLc, submitDraftTest, createTestAI, postUserAnswers };
 
 }

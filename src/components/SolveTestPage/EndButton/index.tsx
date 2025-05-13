@@ -7,22 +7,10 @@ interface Props {
     testName: string;
     userAnswers: { [problemId: number]: number | null };
     isDisabled: boolean;
+    handleSubmit: () => void;
 }
 
-export function EndButton({ testName, userAnswers, isDisabled }: Props) {
-    const handleSubmit = () => {
-        const answersToSend = Object.entries(userAnswers).map(([problemId, answerId]) => ({
-            problemId: Number(problemId),
-            answerId: answerId!,
-        }));
-
-        const payload = {
-            testName,
-            answers: answersToSend,
-        };
-
-        console.log('Готово к отправке:', payload);
-    };
+export function EndButton({ testName, userAnswers, isDisabled, handleSubmit }: Props) {
 
     return (
         <>

@@ -8,6 +8,8 @@ import { TestName } from '@/components/edit/test_name/test_name';
 import { ActionButtonsGroup } from '@/components/edit/actionButtonsGroup/actionButtonsGroup';
 import styles from './edit.module.css';
 import { LocalStorageDraftTest, useRequests } from '@/shared/api/req';
+import { Loader } from '@/shared/ui/Loader';
+import { ErrorMessage } from '@/shared/ui/ErrorMessage';
 
 interface Task {
   question: string;
@@ -53,15 +55,9 @@ const CreateTestPage = () => {
       setIsInitialized(true);
     }
   }, []);
-  // ДОБАВИТЬ ЛОАДЕР 
-  if (!isInitialized) return null;
 
-  // const isTestProblemsValid = tasks.every(task =>
-  //   task.question.trim() !== '' &&
-  //   task.answers.length >= 2 &&
-  //   task.answers.some(answer => answer.is_correct) &&
-  //   task.answers.every(answer => answer.value.trim() !== '')
-  // );
+  if (!isInitialized) return <Loader />;
+
   const { submitDraftTest } = useRequests();
 
   // ИСПРАВИТЬ 
@@ -157,12 +153,11 @@ const CreateTestPage = () => {
         <AddTaskButton onClick={handleAddTask} />
       </div>
 
-      {error && (
-        <div className={styles.validationError}>
-          <p>{error}</p>
-        </div>
-      )}
 
+
+      {error && (
+        <ErrorMessage isActive={true} message={error} />
+      )}
       <ActionButtonsGroup
         shareHref="/share-link"
         testId={testId}

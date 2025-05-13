@@ -40,9 +40,8 @@ export function Problem({
                     // Расчёт цвета кнопки
                     const colorClass = css[`color${(idx % 4) + 1}`];
                     return (
-                        <div className={css.position}>
+                        <div key={idx} className={css.position}>
                             <button
-                                key={answer.id}
                                 onClick={() => handleAnswerClick(answer.id)}
                                 className={clsx(
                                     css.problem_answer, // Основной стиль кнопки
