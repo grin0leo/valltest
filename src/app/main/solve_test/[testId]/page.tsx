@@ -6,7 +6,7 @@ import { Problem } from '@/components/SolveTestPage/Problem';
 import { EndButton } from '@/components/SolveTestPage/EndButton';
 import { useEffect, useState } from 'react';
 import { useRequests } from '@/shared/api/req';
-import { useSearchParams, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { Loader } from '@/shared/ui/Loader';
 
 interface AnswerSolve {
@@ -25,14 +25,15 @@ interface TestData {
     problems: Problem[];
 }
 
-export default function SolveTestPage() {
+export default function SolveTestPage({ searchParams }: { searchParams: { [key: string]: string } }) {
+    const testId = searchParams.test_id;
     const { getTestById, submitDraftTest } = useRequests();
     const [isPending, setIsPending] = useState<boolean>(false);
     const [testData, setTestData] = useState<TestData | null>(null);
     const [userAnswers, setUserAnswers] = useState<{ [problemId: number]: number | null }>({});
-    const searchParams = useSearchParams();
+
     const router = useRouter();
-    const testId = searchParams.get('testId');
+
 
     useEffect(() => {
         if (!testId) return;
