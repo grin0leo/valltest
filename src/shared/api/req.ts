@@ -71,7 +71,7 @@ export const useRequests = (): UseTests => {
     const getAllTests = async (userId: string | number) => {
         // ИСПРАВИТЬ РУЧКУ
         // return await api.get(`/user/tests/${userId}`)
-        return await api.get(`/tests`)
+        return await api.get(`tests?page=1&take=10"`)
 
 
     }
