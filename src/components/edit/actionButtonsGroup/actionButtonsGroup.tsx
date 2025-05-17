@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import styles from './actionButtonsGroup.module.css';
-import Image from 'next/image';
+import { useState } from "react";
+import styles from "./actionButtonsGroup.module.css";
+import Image from "next/image";
 
 interface ActionButtonsGroupProps {
   shareHref: string;
@@ -10,13 +10,13 @@ interface ActionButtonsGroupProps {
   onSave: () => void;
   isSaved: boolean;
 }
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 
 export const ActionButtonsGroup = ({
   shareHref,
-  testId = '10',
+  testId,
   onSave,
-  isSaved
+  isSaved,
 }: ActionButtonsGroupProps) => {
   const router = useRouter();
   const [showSaveTooltip, setShowSaveTooltip] = useState(false);
@@ -35,7 +35,7 @@ export const ActionButtonsGroup = ({
             if (!isSaved) return;
             const shareUrl = `${window.location.origin}/main/solve_test/${testId}`;
             navigator.clipboard.writeText(shareUrl);
-            alert('Ссылка скопирована в буфер обмена');
+            alert("Ссылка скопирована в буфер обмена");
           }}
           className={`${styles.button} ${styles.shareButton}`}
           disabled={!isSaved}
@@ -52,9 +52,7 @@ export const ActionButtonsGroup = ({
           Поделиться
         </button>
         {showTestTooltip && !isSaved && (
-          <div className={styles.tooltip}>
-            Сначала сохраните тест
-          </div>
+          <div className={styles.tooltip}>Сначала сохраните тест</div>
         )}
       </div>
 
@@ -65,15 +63,15 @@ export const ActionButtonsGroup = ({
             setShowSaveTooltip(true);
             setTimeout(() => setShowSaveTooltip(false), 3000);
           }}
-          className={`${styles.button} ${isSaved ? styles.savedButton : ''}`}
-          style={isSaved ? { backgroundColor: 'transparent', color: 'white' } : {}}
+          className={`${styles.button} ${isSaved ? styles.savedButton : ""}`}
+          style={
+            isSaved ? { backgroundColor: "transparent", color: "white" } : {}
+          }
         >
           Сохранить в мастерскую
         </button>
         {showSaveTooltip && isSaved && (
-          <div className={styles.saveTooltip}>
-            Успешно сохранено
-          </div>
+          <div className={styles.saveTooltip}>Успешно сохранено</div>
         )}
       </div>
 
