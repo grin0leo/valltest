@@ -106,7 +106,8 @@ export const useRequests = (): UseTests => {
     if (!raw) throw new Error("Нет черновика в localStorage");
 
     const draft: LocalStorageDraftTest = JSON.parse(raw);
-    const res = await api.post("/tests", draft);
+    // const res = await api.post("/tests", draft);
+    const res = await api.post("/create_test_manually", draft);
 
     return res.data.testId;
   };
