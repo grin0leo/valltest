@@ -6,7 +6,7 @@ import { Problem } from "@/components/SolveTestPage/Problem";
 import { EndButton } from "@/components/SolveTestPage/EndButton";
 import { useEffect, useState } from "react";
 import { useRequests } from "@/shared/api/req";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Loader } from "@/shared/ui/Loader";
 
 interface AnswerSolve {
@@ -25,8 +25,7 @@ interface TestData {
   problems: Problem[];
 }
 export default function SolveTestPage() {
-  const searchParams = useSearchParams();
-  let testId = searchParams.get("test_id") ?? "";
+  const { testId } = useParams<{ testId: string }>();
   const { getTestById, submitDraftTest } = useRequests();
   const [isPending, setIsPending] = useState<boolean>(false);
   const [testData, setTestData] = useState<TestData | null>(null);
@@ -43,9 +42,10 @@ export default function SolveTestPage() {
       try {
         setIsPending(true);
         const data = await getTestById(testId);
-        setTestData(data.data);
+        if (data.status === 200 && data.data) {
+          setTestData(data.data);
+        }
       } catch (error) {
-        // alert('Ошибка при загрузке теста');
         console.error(error);
       } finally {
         setIsPending(false);
