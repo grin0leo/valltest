@@ -56,7 +56,10 @@ export default function SolveTestPage() {
   }, []);
 
   const handleAnswerSelect = (problemId: number, answerId: number) => {
-    setUserAnswers((prev) => ({ ...prev, [problemId]: answerId }));
+    setUserAnswers((prev) => ({
+      ...prev,
+      [Number(problemId)]: answerId,
+    }));
   };
 
   const allAnswered = testData?.problems?.every(
@@ -104,7 +107,7 @@ export default function SolveTestPage() {
               questionNumber={index + 1}
               questionText={problem.question}
               answers={problem.answers}
-              selectedAnswerId={userAnswers[problem.id] ?? null}
+              selectedAnswerId={userAnswers[Number(problem.id)] ?? null}
               onSelectAnswer={(answerId) =>
                 handleAnswerSelect(problem.id, answerId)
               }

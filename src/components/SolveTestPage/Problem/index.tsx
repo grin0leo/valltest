@@ -87,6 +87,8 @@ export function Problem({
   selectedAnswerId,
   onSelectAnswer,
 }: Props) {
+  console.log("selectedAnswerId", selectedAnswerId);
+
   return (
     <section className={css.problem_content}>
       <h2 className={css.problem_title}>Задание №{questionNumber}</h2>
