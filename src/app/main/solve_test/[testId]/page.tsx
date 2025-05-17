@@ -26,7 +26,7 @@ interface TestData {
 }
 export default function SolveTestPage() {
     const searchParams = useSearchParams();
-    const testId = searchParams.get('test_id') ?? '';
+    let testId = searchParams.get('test_id') ?? '';
     const { getTestById, submitDraftTest } = useRequests();
     const [isPending, setIsPending] = useState<boolean>(false);
     const [testData, setTestData] = useState<TestData | null>(null);
@@ -36,6 +36,7 @@ export default function SolveTestPage() {
 
 
     useEffect(() => {
+        testId = '1'
         if (!testId) return;
 
         const fetchTest = async () => {
@@ -44,7 +45,7 @@ export default function SolveTestPage() {
                 const data = await getTestById(testId);
                 setTestData(data.data);
             } catch (error) {
-                alert('Ошибка при загрузке теста');
+                // alert('Ошибка при загрузке теста');
                 console.error(error);
             } finally {
                 setIsPending(false);
