@@ -36,7 +36,7 @@ export default function SolveTestPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!testId) return;
+    // if (!testId) return;
 
     const fetchTest = async () => {
       try {
@@ -53,7 +53,7 @@ export default function SolveTestPage() {
     };
 
     fetchTest();
-  }, [testId, getTestById]);
+  }, []);
 
   const handleAnswerSelect = (problemId: number, answerId: number) => {
     setUserAnswers((prev) => ({ ...prev, [problemId]: answerId }));
@@ -90,7 +90,7 @@ export default function SolveTestPage() {
           <nav className={css.header_nav}>
             {testData.problems.map((problem, index) => (
               <NumberOfProblems
-                key={problem.id}
+                key={index}
                 number={index + 1}
                 isActive={index === 0}
               />
@@ -100,7 +100,7 @@ export default function SolveTestPage() {
         <section>
           {testData.problems.map((problem, index) => (
             <Problem
-              key={problem.id}
+              key={index}
               questionNumber={index + 1}
               questionText={problem.question}
               answers={problem.answers}
