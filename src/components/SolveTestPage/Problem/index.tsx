@@ -96,12 +96,12 @@ export function Problem({
       <div className={css.problem_answers}>
         {answers.map((answer, idx) => {
           const colorClass = css[`color${(idx % 4) + 1}`];
-          const isSelected = selectedAnswerId === answer.id;
+          const isSelected = selectedAnswerId === idx;
 
           return (
             <div key={idx} className={css.position}>
               <button
-                onClick={() => onSelectAnswer(answer.id)}
+                onClick={() => onSelectAnswer(idx)}
                 className={clsx(
                   css.problem_answer,
                   colorClass,
