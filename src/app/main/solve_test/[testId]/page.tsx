@@ -15,7 +15,6 @@ interface AnswerSolve {
 }
 
 interface Problem {
-  id: number;
   question: string;
   answers: AnswerSolve[];
 }
@@ -30,7 +29,7 @@ export default function SolveTestPage() {
   const [isPending, setIsPending] = useState<boolean>(false);
   const [testData, setTestData] = useState<TestData | null>(null);
   const [userAnswers, setUserAnswers] = useState<{
-    [problemId: number]: number | null;
+    [index: number]: number | null;
   }>({});
 
   const router = useRouter();
@@ -55,16 +54,16 @@ export default function SolveTestPage() {
     fetchTest();
   }, []);
 
-  const handleAnswerSelect = (problemId: number, answerId: number) => {
+  const handleAnswerSelect = (index: number, answerId: number) => {
     setUserAnswers((prev) => ({
       ...prev,
-      [Number(problemId)]: answerId,
+      [index]: answerId,
     }));
   };
 
   const allAnswered = testData?.problems?.every(
-    (problem) =>
-      userAnswers[problem.id] !== undefined && userAnswers[problem.id] !== null
+    (_, index) =>
+      userAnswers[index] !== undefined && userAnswers[index] !== null
   );
 
   // ОШИБКА !!! ИСПОЛЬЗУЕТСЯ НЕ ТА ФУНКЦИЯ, НУЖНО ОТПРАВЛЯТЬ РЕЗУЛЬТАТЫ ОТВЕТОВ
@@ -107,10 +106,8 @@ export default function SolveTestPage() {
               questionNumber={index + 1}
               questionText={problem.question}
               answers={problem.answers}
-              selectedAnswerId={userAnswers[Number(problem.id)] ?? null}
-              onSelectAnswer={(answerId) =>
-                handleAnswerSelect(problem.id, answerId)
-              }
+              selectedAnswerId={userAnswers[index] ?? null}
+              onSelectAnswer={(answerId) => handleAnswerSelect(index, answerId)}
             />
           ))}
         </section>
