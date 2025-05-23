@@ -1,30 +1,27 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import css from './create_test_ai.module.css';
-import Button from '@/components/create_test/button/button';
-import Dropdown from '@/components/create_test/dropdown/dropdown';
-import Container from '@/components/create_test/container/container';
-import Input from '@/components/create_test/input/input';
-import SimpleButton from '@/components/create_test/simplebutton/simplebutton';
-import { ErrorMessage } from '@/shared/ui/ErrorMessage';
-import { useRequests } from '@/shared/api/req';
-import { useRouter } from 'next/navigation';
-
+import { useState } from "react";
+import css from "./create_test_ai.module.css";
+import Dropdown from "@/components/create_test/dropdown/dropdown";
+import Container from "@/components/create_test/container/container";
+import Input from "@/components/create_test/input/input";
+import SimpleButton from "@/components/create_test/simplebutton/simplebutton";
+import { ErrorMessage } from "@/shared/ui/ErrorMessage";
+import { useRequests } from "@/shared/api/req";
+import { useRouter } from "next/navigation";
 
 export default function CreateTestAIPage() {
-  const router = useRouter()
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('')
+  const [error, setError] = useState("");
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [inputValues, setInputValues] = useState({
-    testName: '',
-    subject: '',
-    topic: '',
-    difficulty: 'Легкий',
-    questionsCount: ''
+    testName: "",
+    subject: "",
+    topic: "",
+    difficulty: "Легкий",
+    questionsCount: "",
   });
-
 
   const { createTestAI, getTestByIdLc } = useRequests();
 
@@ -33,16 +30,16 @@ export default function CreateTestAIPage() {
   };
 
   const handleSelect = (field: keyof typeof inputValues, value: string) => {
-    setInputValues(prev => ({ ...prev, [field]: value }));
+    setInputValues((prev) => ({ ...prev, [field]: value }));
     setOpenDropdown(null);
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setInputValues(prev => ({ ...prev, [name]: value }));
+    setInputValues((prev) => ({ ...prev, [name]: value }));
   };
 
-  const isValid = Object.values(inputValues).every(val => val.trim() !== '');
+  const isValid = Object.values(inputValues).every((val) => val.trim() !== "");
 
   const handleSubmit = async () => {
     if (!isValid || isLoading) return;
@@ -52,13 +49,13 @@ export default function CreateTestAIPage() {
       const res = await createTestAI(inputValues);
       const testId = res.data.test_id;
       await getTestByIdLc(testId);
-      router.push('/main/edit');
+      router.push("/main/edit");
     } catch (error: unknown) {
       console.error(error);
       if (error instanceof Error) {
         setError(error.message);
       } else {
-        setError('Произошла неизвестная ошибка');
+        setError("Произошла неизвестная ошибка");
       }
     } finally {
       setIsLoading(false);
@@ -67,29 +64,45 @@ export default function CreateTestAIPage() {
 
   const dropdowns = [
     {
-      id: 'subject',
-      label: <>Предмет<span className={css.required}> *</span></>,
-      placeholder: 'Выберите предмет',
-      options: ['Математика']
+      id: "subject",
+      label: (
+        <>
+          Предмет<span className={css.required}> *</span>
+        </>
+      ),
+      placeholder: "Выберите предмет",
+      options: ["Математика"],
     },
     {
-      id: 'questionsCount',
-      label: <>Количество вопросов<span className={css.required}> *</span></>,
-      placeholder: 'Выберите количество',
-      options: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10']
+      id: "questionsCount",
+      label: (
+        <>
+          Количество вопросов<span className={css.required}> *</span>
+        </>
+      ),
+      placeholder: "Выберите количество",
+      options: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
     },
     {
-      id: 'topic',
-      label: <>Тема<span className={css.required}> *</span></>,
-      placeholder: 'Выберите тему',
-      options: ['Матрицы', 'Интегралы', 'Производные', 'Пределы', 'Векторы']
+      id: "topic",
+      label: (
+        <>
+          Тема<span className={css.required}> *</span>
+        </>
+      ),
+      placeholder: "Выберите тему",
+      options: ["Матрицы", "Интегралы", "Производные", "Пределы", "Векторы"],
     },
     {
-      id: 'difficulty',
-      label: <>Уровень<span className={css.required}> *</span></>,
-      placeholder: 'Выберите уровень сложности',
-      options: ['Легкий', 'Средний', 'Сложный']
-    }
+      id: "difficulty",
+      label: (
+        <>
+          Уровень<span className={css.required}> *</span>
+        </>
+      ),
+      placeholder: "Выберите уровень сложности",
+      options: ["Легкий", "Средний", "Сложный"],
+    },
   ];
 
   return (
@@ -99,7 +112,11 @@ export default function CreateTestAIPage() {
 
         <Container title="Общая информация">
           <Input
-            label={<span>Название теста <span className={css.required}>*</span></span>}
+            label={
+              <span>
+                Название теста <span className={css.required}>*</span>
+              </span>
+            }
             placeholder="Напишите название теста"
             name="testName"
             value={inputValues.testName}
@@ -109,7 +126,7 @@ export default function CreateTestAIPage() {
 
         <Container title="Настройки теста ИИ">
           <div className={css.dropdownsContainer}>
-            {dropdowns.map(dropdown => (
+            {dropdowns.map((dropdown) => (
               <Dropdown
                 key={dropdown.id}
                 id={dropdown.id}
@@ -117,7 +134,9 @@ export default function CreateTestAIPage() {
                 placeholder={dropdown.placeholder}
                 options={dropdown.options}
                 value={inputValues[dropdown.id as keyof typeof inputValues]}
-                onSelect={value => handleSelect(dropdown.id as keyof typeof inputValues, value)}
+                onSelect={(value) =>
+                  handleSelect(dropdown.id as keyof typeof inputValues, value)
+                }
                 isOpen={openDropdown === dropdown.id}
                 onToggle={() => toggleDropdown(dropdown.id)}
               />
@@ -125,7 +144,9 @@ export default function CreateTestAIPage() {
           </div>
         </Container>
 
-        {!isValid && <ErrorMessage isActive={true} message="Заполните все поля" />}
+        {!isValid && (
+          <ErrorMessage isActive={true} message="Заполните все поля" />
+        )}
         {error && <ErrorMessage isActive={true} message={error} />}
 
         <div className={css.buttonsContainer}>
@@ -134,9 +155,8 @@ export default function CreateTestAIPage() {
             onClick={handleSubmit}
             disabled={!isValid || isLoading}
           >
-            {isLoading ? 'Создание...' : 'Создать тест'}
+            {isLoading ? "Создание..." : "Создать тест"}
           </SimpleButton>
-
         </div>
       </main>
     </div>

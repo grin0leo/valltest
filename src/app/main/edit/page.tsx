@@ -1,45 +1,44 @@
-'use client';
+"use client";
 
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { TaskForm } from '@/components/edit/task_form/task_form';
-import { AddTaskButton } from '@/components/edit/add_task_button/add_task_button';
-import { TestName } from '@/components/edit/test_name/test_name';
-import { ActionButtonsGroup } from '@/components/edit/actionButtonsGroup/actionButtonsGroup';
-import styles from './edit.module.css';
-import { LocalStorageDraftTest, useRequests } from '@/shared/api/req';
-import { Loader } from '@/shared/ui/Loader';
-import { ErrorMessage } from '@/shared/ui/ErrorMessage';
+import { TaskForm } from "@/components/edit/task_form/task_form";
+import { AddTaskButton } from "@/components/edit/add_task_button/add_task_button";
+import { TestName } from "@/components/edit/test_name/test_name";
+import { ActionButtonsGroup } from "@/components/edit/actionButtonsGroup/actionButtonsGroup";
+import styles from "./edit.module.css";
+import { LocalStorageDraftTest, useRequests } from "@/shared/api/req";
+import { Loader } from "@/shared/ui/Loader";
+import { ErrorMessage } from "@/shared/ui/ErrorMessage";
 
 interface Task {
   question: string;
   answers: { value: string; is_correct: boolean }[];
 }
 
-
 const CreateTestPage = () => {
   const router = useRouter();
   const [tasks, setTasks] = useState<Task[]>([]);
-  const [testName, setTestName] = useState('');
-  const [topic, setTopic] = useState('');
-  const [difficulty, setDifficulty] = useState('');
+  const [testName, setTestName] = useState("");
+  const [topic, setTopic] = useState("");
+  const [difficulty, setDifficulty] = useState("");
   const [isPending, setIsPending] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const [isSaved, setIsSaved] = useState(false);
 
-  const [testId, setTestId] = useState('')
+  const [testId, setTestId] = useState("");
 
   const [isInitialized, setIsInitialized] = useState(false);
 
   useEffect(() => {
-    const raw = localStorage.getItem('testDraft');
+    const raw = localStorage.getItem("testDraft");
     if (!raw) return;
 
     try {
       const parsed: LocalStorageDraftTest = JSON.parse(raw);
-      setTestName(parsed.testName ?? '');
-      setTopic(parsed.topic ?? '');
-      setDifficulty(parsed.difficulty ?? '');
+      setTestName(parsed.testName ?? "");
+      setTopic(parsed.topic ?? "");
+      setDifficulty(parsed.difficulty ?? "");
       setTasks(
         parsed.problems.map((q) => ({
           question: q.problem,
@@ -50,7 +49,7 @@ const CreateTestPage = () => {
         }))
       );
     } catch (err) {
-      console.error('Ошибка при загрузке черновика:', err);
+      console.error("Ошибка при загрузке черновика:", err);
     } finally {
       setIsInitialized(true);
     }
@@ -60,40 +59,38 @@ const CreateTestPage = () => {
 
   const { submitDraftTest } = useRequests();
 
-  // ИСПРАВИТЬ 
+  // ИСПРАВИТЬ
   const handleShareTest = () => {
-    console.log('Тест поделен');
+    console.log("SHARE");
   };
   const getDraftTestFromState = (): LocalStorageDraftTest => {
     return {
       testName,
       topic,
       difficulty,
-      problems: tasks.map(task => ({
+      problems: tasks.map((task) => ({
         problem: task.question,
-        answers: task.answers.map(ans => ({
+        answers: task.answers.map((ans) => ({
           answer: ans.value,
-          isCorrect: ans.is_correct
-        }))
-      }))
+          isCorrect: ans.is_correct,
+        })),
+      })),
     };
   };
 
-
   const handleSaveToWorkshop = async () => {
-
     try {
       setIsPending(true);
       const draft = getDraftTestFromState();
-      localStorage.setItem('testDraft', JSON.stringify(draft));
+      localStorage.setItem("testDraft", JSON.stringify(draft));
 
       const testId = await submitDraftTest();
-      console.log('Тест сохранен в мастерскую, ID:', testId);
-      setTestId(testId)
+      console.log("Тест сохранен в мастерскую, ID:", testId);
+      setTestId(testId);
       setIsSaved(true);
     } catch (err) {
-      console.error('Ошибка при сохранении теста:', err);
-      setError('Не удалось сохранить тест');
+      console.error("Ошибка при сохранении теста:", err);
+      setError("Не удалось сохранить тест");
       setIsSaved(false);
     } finally {
       setIsPending(false);
@@ -101,13 +98,16 @@ const CreateTestPage = () => {
   };
 
   const handleAddTask = () => {
-    setTasks([...tasks, {
-      question: '',
-      answers: [
-        { value: '', is_correct: false },
-        { value: '', is_correct: false }
-      ]
-    }]);
+    setTasks([
+      ...tasks,
+      {
+        question: "",
+        answers: [
+          { value: "", is_correct: false },
+          { value: "", is_correct: false },
+        ],
+      },
+    ]);
   };
 
   const handleRemoveTask = (taskNumber: number) => {
@@ -120,7 +120,10 @@ const CreateTestPage = () => {
     setTasks(newTasks);
   };
 
-  const handleAnswersChange = (index: number, answers: { value: string; is_correct: boolean }[]) => {
+  const handleAnswersChange = (
+    index: number,
+    answers: { value: string; is_correct: boolean }[]
+  ) => {
     const newTasks = [...tasks];
     newTasks[index].answers = answers;
     setTasks(newTasks);
@@ -153,19 +156,13 @@ const CreateTestPage = () => {
         <AddTaskButton onClick={handleAddTask} />
       </div>
 
-
-
-      {error && (
-        <ErrorMessage isActive={true} message={error} />
-      )}
+      {error && <ErrorMessage isActive={true} message={error} />}
       <ActionButtonsGroup
         shareHref="/share-link"
         testId={testId}
         isSaved={isSaved}
         onSave={handleSaveToWorkshop}
       />
-
-
     </div>
   );
 };

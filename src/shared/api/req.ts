@@ -63,24 +63,24 @@ export const useRequests = (): UseTests => {
 
   // CREATE_TEST_AI
   const createTestAI = async (creationInfoAI: TestAI) => {
-    return await api.post("/generate_math_quastion", creationInfoAI);
+    return await api.post("/generate_math_quastion", creationInfoAI, {
+      timeout: 20000,
+    });
   };
 
   // WORKSHOP
   const getAllTests = async (userId: string | number) => {
-    // ИСПРАВИТЬ РУЧКУ
     return await api.get(`/get_user_tests/${userId}`);
-    // return await api.get(`tests?page=1&take=10"`);
   };
+
   //SOLVE_TEST/
   const getTestById = async (testId: string | number) => {
     return await api.get(`/get_test/${testId}`);
-    // const response = await api.get(`/tests/${testId}`);
   };
 
-  // ожидаю в ответе количество правильных ответов, добавляю его в localStorage
+  // ожидаю в ответе количество правильных ответов, добавляю его в localStorag
   const postUserAnswers = async (testId: string | number) => {
-    const data = await api.post(`/api/user-answers/${testId}`);
+    const data = await api.get(`/api/user-answers/${testId}`);
     const result = data.data.result;
     localStorage.setItem("result", result);
     return result;
