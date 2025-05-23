@@ -91,7 +91,7 @@ export const useRequests = (): UseTests => {
     try {
       const response = await getTestById(testId);
       if (response.status === 200) {
-        localStorage.setItem("test", JSON.stringify(response.data));
+        localStorage.setItem("testDraft", JSON.stringify(response.data));
       } else {
         console.error("Не удалось получить тест", response.status);
       }
