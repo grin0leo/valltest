@@ -73,7 +73,7 @@ export default function SolveTestPage() {
         .map((answerId) => ({ answerId }));
 
       const data = await postUserAnswers(testId, answersArray);
-      router.push("/main/results");
+      router.push("/main/result");
     } catch (error) {
       console.error("Ошибка при отправке теста:", error);
       alert("Не удалось отправить тест");
