@@ -1,5 +1,6 @@
 import { AxiosResponse } from "axios";
 import { api } from "./api";
+import { error } from "console";
 
 // ТАЙПСЫ ПЕРЕНЕСТИ
 export type Test = {
@@ -37,7 +38,10 @@ type UseTests = {
   createTestAI: (creationInfo: TestAI) => Promise<AxiosResponse>;
   getAllTests: (userId: string | number) => Promise<AxiosResponse>;
   getTestById: (testId: string | number) => Promise<AxiosResponse>;
-  postUserAnswers: (testId: string | number) => Promise<AxiosResponse>;
+  postUserAnswers: (
+    testId: string | number,
+    answers: { answerId: number }[]
+  ) => Promise<AxiosResponse>;
   getTestByIdLc: (testId: string | number) => Promise<void>;
   submitDraftTest: () => Promise<string>;
 };
@@ -78,14 +82,6 @@ export const useRequests = (): UseTests => {
     return await api.get(`/get_test/${testId}`);
   };
 
-  // ожидаю в ответе количество правильных ответов, добавляю его в localStorag
-  const postUserAnswers = async (testId: string | number) => {
-    const data = await api.get(`/api/user-answers/${testId}`);
-    const result = data.data.result;
-    localStorage.setItem("result", result);
-    return result;
-  };
-
   // получаем тест по ID и добавляем его в localStorage
   const getTestByIdLc = async (testId: string | number) => {
     try {
@@ -100,13 +96,32 @@ export const useRequests = (): UseTests => {
     }
   };
 
+  // ожидаю в ответе количество правильных ответов, добавляю его в localStorag
+  const postUserAnswers = async (
+    testId: string | number,
+    answers: { answerId: number }[]
+  ) => {
+    try {
+      const data = await api.post(
+        `/get_correct_answers_amount/${testId}`,
+        answers
+      );
+
+      const result = data.data.result;
+      localStorage.setItem("result", result);
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // Отправляю json а бэк, это запрос к странице edit
   const submitDraftTest = async (): Promise<string> => {
     const raw = localStorage.getItem("testDraft");
+
     if (!raw) throw new Error("Нет черновика в localStorage");
 
     const draft: LocalStorageDraftTest = JSON.parse(raw);
-    // const res = await api.post("/tests", draft);
     const res = await api.post("/create_test_manually", draft);
 
     return res.data.testId;

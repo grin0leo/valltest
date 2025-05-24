@@ -87,8 +87,6 @@ export function Problem({
   selectedAnswerId,
   onSelectAnswer,
 }: Props) {
-  console.log("selectedAnswerId", selectedAnswerId);
-
   return (
     <section className={css.problem_content}>
       <h2 className={css.problem_title}>Задание №{questionNumber}</h2>
@@ -99,7 +97,7 @@ export function Problem({
           const isSelected = selectedAnswerId === answer.id;
 
           return (
-            <div key={idx} className={css.position}>
+            <div key={answer.id} className={css.position}>
               <button
                 onClick={() => onSelectAnswer(answer.id)}
                 className={clsx(
@@ -107,11 +105,10 @@ export function Problem({
                   colorClass,
                   isSelected && css.selected
                 )}
-                aria-label={`Вариант ${idx}`}
+                aria-label={`Вариант ${idx + 1}`}
               >
                 {answer.value}
               </button>
-              {/* <div className={css.problem_answer_id}>{answer.id}</div> */}
             </div>
           );
         })}

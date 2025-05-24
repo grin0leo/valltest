@@ -25,7 +25,7 @@ interface TestData {
 }
 export default function SolveTestPage() {
   const { testId } = useParams<{ testId: string }>();
-  const { getTestById, submitDraftTest } = useRequests();
+  const { getTestById, postUserAnswers } = useRequests();
   const [isPending, setIsPending] = useState<boolean>(false);
   const [testData, setTestData] = useState<TestData | null>(null);
   const [userAnswers, setUserAnswers] = useState<{
@@ -66,13 +66,14 @@ export default function SolveTestPage() {
       userAnswers[index] !== undefined && userAnswers[index] !== null
   );
 
-  // ОШИБКА !!! ИСПОЛЬЗУЕТСЯ НЕ ТА ФУНКЦИЯ, НУЖНО ОТПРАВЛЯТЬ РЕЗУЛЬТАТЫ ОТВЕТОВ
   const handleSubmit = async () => {
     try {
-      const newTestId = await submitDraftTest();
-      console.log("Тест успешно сохранён, ID:", newTestId);
-      localStorage.removeItem("testDraft"); // очищаем localStorage
-      router.push(`/tests/${newTestId}`);
+      const answersArray = Object.values(userAnswers)
+        .filter((answerId): answerId is number => answerId !== null)
+        .map((answerId) => ({ answerId }));
+
+      const data = await postUserAnswers(testId, answersArray);
+      router.push("/main/results");
     } catch (error) {
       console.error("Ошибка при отправке теста:", error);
       alert("Не удалось отправить тест");
