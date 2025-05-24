@@ -68,11 +68,12 @@ export default function SolveTestPage() {
 
   const handleSubmit = async () => {
     try {
-      const answersArray = Object.values(userAnswers)
+      const answers = Object.values(userAnswers)
         .filter((answerId): answerId is number => answerId !== null)
         .map((answerId) => ({ answerId }));
 
-      const data = await postUserAnswers(testId, answersArray);
+      const data = await postUserAnswers(testId, { answers });
+
       router.push("/main/result");
     } catch (error) {
       console.error("Ошибка при отправке теста:", error);

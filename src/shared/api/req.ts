@@ -40,7 +40,7 @@ type UseTests = {
   getTestById: (testId: string | number) => Promise<AxiosResponse>;
   postUserAnswers: (
     testId: string | number,
-    answers: { answerId: number }[]
+    payload: { answers: { answerId: number }[] }
   ) => Promise<AxiosResponse>;
   getTestByIdLc: (testId: string | number) => Promise<void>;
   submitDraftTest: () => Promise<string>;
@@ -99,12 +99,12 @@ export const useRequests = (): UseTests => {
   // ожидаю в ответе количество правильных ответов, добавляю его в localStorag
   const postUserAnswers = async (
     testId: string | number,
-    answers: { answerId: number }[]
+    payload: { answers: { answerId: number }[] }
   ) => {
     try {
       const data = await api.post(
         `/get_correct_answers_amount/${testId}`,
-        answers
+        payload
       );
 
       const result = data.data.result;
