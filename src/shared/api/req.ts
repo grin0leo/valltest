@@ -107,7 +107,7 @@ export const useRequests = (): UseTests => {
         payload
       );
 
-      const result = data.data;
+      const result = data.data.result;
       localStorage.setItem("result", result);
       return result;
     } catch (error) {
