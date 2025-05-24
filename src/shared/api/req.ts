@@ -108,7 +108,7 @@ export const useRequests = (): UseTests => {
       );
 
       const result = data.data.result;
-      localStorage.setItem("result", result);
+      localStorage.setItem("result", JSON.stringify(result));
       return result;
     } catch (error) {
       console.log(error);
