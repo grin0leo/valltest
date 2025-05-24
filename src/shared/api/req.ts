@@ -81,11 +81,14 @@ export const useRequests = (): UseTests => {
   const getTestById = async (testId: string | number) => {
     return await api.get(`/get_test/${testId}`);
   };
+  const getDraftTestById = async (testId: string | number) => {
+    return await api.get(`/get_draft_test/${testId}`);
+  };
 
   // получаем тест по ID и добавляем его в localStorage
   const getTestByIdLc = async (testId: string | number) => {
     try {
-      const response = await getTestById(testId);
+      const response = await getDraftTestById(testId);
       if (response.status === 200) {
         localStorage.setItem("testDraft", JSON.stringify(response.data));
       } else {
