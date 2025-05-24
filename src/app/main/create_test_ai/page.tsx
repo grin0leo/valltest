@@ -47,7 +47,7 @@ export default function CreateTestAIPage() {
     setIsLoading(true);
     try {
       const res = await createTestAI(inputValues);
-      const testId = res.data.test_id;
+      const testId = res.data.tesеId;
       await getTestByIdLc(testId);
       router.push("/main/edit");
     } catch (error: unknown) {
